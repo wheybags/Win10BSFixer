@@ -73,6 +73,7 @@
       this.Name = "MainForm";
       this.Text = "Win10BSFixer";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+      this.Shown += new System.EventHandler(this.MainForm_Shown);
       this.Resize += new System.EventHandler(this.MainForm_Resize);
       this.ResumeLayout(false);
 

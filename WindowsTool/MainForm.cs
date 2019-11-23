@@ -56,6 +56,7 @@ namespace Win10BSFixer
 
       var settings = Settings.Instance.data;
       AddSettingsItem("Force disable windows updates", settings.KillWindowsUpdate, x => { settings.KillWindowsUpdate = x; updatesKiller.Enabled = x; });
+      AddSettingsItem("Start Minimised", settings.StartMinimised, x => { settings.StartMinimised = x; });
     }
 
     private Dictionary<int, Action<bool>> SetterDictionary = new Dictionary<int, Action<bool>>();
@@ -144,6 +145,17 @@ namespace Win10BSFixer
 
       Hide();
       e.Cancel = true;
+    }
+
+    bool IsFirstShown = true;
+    private void MainForm_Shown(object sender, EventArgs e)
+    {
+      if (IsFirstShown)
+      {
+        IsFirstShown = false;
+        if (Settings.Instance.data.StartMinimised)
+          Hide();
+      }
     }
   }
 }

@@ -63,6 +63,7 @@ namespace Win10BSFixer
     public class Data
     {
       public bool KillWindowsUpdate = true;
+      public bool StartMinimised = false;
     }
 
     public Data data = new Data();
