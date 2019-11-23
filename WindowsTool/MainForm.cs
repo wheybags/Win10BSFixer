@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace WindowsTool
 {
-  public partial class Form1 : Form
+  public partial class MainForm : Form
   {
-    public Form1()
+    UpdatesKiller updatesKiller;
+
+    public MainForm()
     {
+      updatesKiller = new UpdatesKiller(true);
+
       InitializeComponent();
+
+      SettingsCheckedListBox.Items.Add("Force disable windows updates", true);
     }
   }
 }
