@@ -42,6 +42,12 @@ namespace WindowsTool
       }
     }
 
+    public void EnsureUpdatesAllowed()
+    {
+      Enabled = false;
+      while (!ReEnableServiceDone)
+        Thread.Sleep(500);
+    }
 
     private volatile bool Quit = false;
     private volatile bool QuitDone = false;

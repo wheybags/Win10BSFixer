@@ -51,6 +51,11 @@ namespace WindowsTool
       }
     }
 
+    public void Reset()
+    {
+      data = new Data();
+    }
+
     [Serializable]
     public class Data
     {
