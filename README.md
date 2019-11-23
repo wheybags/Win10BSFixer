@@ -12,3 +12,6 @@ Roadmap:
 - Nagging you to install updates (but NEVER forcing one)
 - Various efforts at disabling telemetry
 - Remove crapware (Onedrive, the crappy social games, start menu ads etc)
+
+## Downloads
+https://github.com/wheybags/Win10BSFixer/releases
