@@ -21,6 +21,7 @@
       this.UpdateNowButton = new System.Windows.Forms.Button();
       this.ResetButton = new System.Windows.Forms.Button();
       this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+      this.InstallButton = new System.Windows.Forms.Button();
       this.SuspendLayout();
       // 
       // SettingsCheckedListBox
@@ -59,11 +60,22 @@
       this.NotifyIcon.Visible = true;
       this.NotifyIcon.DoubleClick += new System.EventHandler(this.NotifyIcon_DoubleClick);
       // 
+      // InstallButton
+      // 
+      this.InstallButton.Location = new System.Drawing.Point(577, 346);
+      this.InstallButton.Name = "InstallButton";
+      this.InstallButton.Size = new System.Drawing.Size(305, 42);
+      this.InstallButton.TabIndex = 3;
+      this.InstallButton.Text = "Install + run on startup";
+      this.InstallButton.UseVisualStyleBackColor = true;
+      this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(894, 458);
+      this.Controls.Add(this.InstallButton);
       this.Controls.Add(this.ResetButton);
       this.Controls.Add(this.UpdateNowButton);
       this.Controls.Add(this.SettingsCheckedListBox);
@@ -85,6 +97,7 @@
     private System.Windows.Forms.Button UpdateNowButton;
     private System.Windows.Forms.Button ResetButton;
     private System.Windows.Forms.NotifyIcon NotifyIcon;
+    private System.Windows.Forms.Button InstallButton;
   }
 }
 

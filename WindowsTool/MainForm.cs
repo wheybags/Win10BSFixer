@@ -35,6 +35,11 @@ namespace Win10BSFixer
       });
 
       NotifyIcon.ContextMenu = sysTrayContextMenu;
+
+      if (RunOnStartupHandler.Installed())
+        InstallButton.Text = "Uninstall";
+      else
+        InstallButton.Text = "Install + run on startup";
     }
 
     protected override void Dispose(bool disposing)
@@ -156,6 +161,20 @@ namespace Win10BSFixer
         if (Settings.Instance.data.StartMinimised)
           Hide();
       }
+    }
+
+    private void InstallButton_Click(object sender, EventArgs e)
+    {
+      if (!RunOnStartupHandler.Installed())
+        RunOnStartupHandler.InstallAndScheduleForStartup();
+      else
+        RunOnStartupHandler.Uninstall();
+
+
+      if (RunOnStartupHandler.Installed())
+        InstallButton.Text = "Uninstall";
+      else
+        InstallButton.Text = "Install + run on startup";
     }
   }
 }
