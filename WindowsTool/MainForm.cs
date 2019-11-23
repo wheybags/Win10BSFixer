@@ -16,11 +16,40 @@ namespace WindowsTool
 
     public MainForm()
     {
-      updatesKiller = new UpdatesKiller(true);
-
       InitializeComponent();
 
-      SettingsCheckedListBox.Items.Add("Force disable windows updates", true);
+      var settings = Settings.Instance.data;
+      updatesKiller = new UpdatesKiller(settings.KillWindowsUpdate);
+
+      AddSettingsItem("Force disable windows updates", settings.KillWindowsUpdate, x => { settings.KillWindowsUpdate = x; updatesKiller.Enabled = x; });
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+
+      if (updatesKiller != null)
+        updatesKiller.Dispose();
+    }
+
+    private Dictionary<int, Action<bool>> SetterDictionary = new Dictionary<int, Action<bool>>();
+    private void AddSettingsItem(string text, bool defaultValue, Action<bool> setAction)
+    {
+      int index = SettingsCheckedListBox.Items.Add(text, defaultValue);
+      SetterDictionary.Add(index, setAction);
+    }
+
+    private void SettingsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+    {
+      if (SetterDictionary.ContainsKey(e.Index))
+      {
+        SetterDictionary[e.Index](e.NewValue == CheckState.Checked);
+        Settings.Instance.Save();
+      }
     }
   }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WindowsTool
 {
-  class UpdatesKiller
+  class UpdatesKiller : IDisposable
   {
     public UpdatesKiller(bool enabled)
     {
@@ -18,6 +18,12 @@ namespace WindowsTool
       WorkerThread.Start();
     }
 
+    public void Dispose()
+    {
+      Quit = true;
+      while (!QuitDone)
+        Thread.Sleep(500);
+    }
 
     public bool Enabled
     {
@@ -32,16 +38,13 @@ namespace WindowsTool
         {
           ReEnableServiceDone = false;
           _Enabled = value;
-
-          if (!value)
-          {
-            while (!ReEnableServiceDone)
-              Thread.Sleep(500);
-          }
         }
       }
     }
 
+
+    private volatile bool Quit = false;
+    private volatile bool QuitDone = false;
     private volatile bool _Enabled = false;
     private volatile bool ReEnableServiceDone = false;
     private Thread WorkerThread;
@@ -50,7 +53,7 @@ namespace WindowsTool
     {
       ServiceController updateService = new ServiceController("wuauserv");
 
-      while (true)
+      while (!Quit)
       {
         if (Enabled)
         {
@@ -74,7 +77,17 @@ namespace WindowsTool
         if (!Enabled && !ReEnableServiceDone)
         {
           ServiceHelper.ChangeStartMode(updateService, ServiceStartMode.Automatic);
-          updateService.Start();
+
+          try
+          {
+            updateService.Start();
+          }
+          catch (InvalidOperationException ex)
+          {
+            if (!(ex.InnerException is Win32Exception) || (ex.InnerException as Win32Exception).NativeErrorCode != 1056) // ERROR_SERVICE_ALREADY_RUNNING
+              throw ex;
+          }
+
           updateService.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(10));
 
           if (updateService.Status == ServiceControllerStatus.Running)
@@ -83,6 +96,8 @@ namespace WindowsTool
 
         Thread.Sleep(10 * 1000);
       }
+
+      QuitDone = true;
     }
   }
 }
