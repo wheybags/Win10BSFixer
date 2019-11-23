@@ -15,9 +15,12 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
       this.SettingsCheckedListBox = new System.Windows.Forms.CheckedListBox();
       this.UpdateNowButton = new System.Windows.Forms.Button();
       this.ResetButton = new System.Windows.Forms.Button();
+      this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
       this.SuspendLayout();
       // 
       // SettingsCheckedListBox
@@ -49,6 +52,13 @@
       this.ResetButton.UseVisualStyleBackColor = true;
       this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
       // 
+      // NotifyIcon
+      // 
+      this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
+      this.NotifyIcon.Text = "Win10BSFixer";
+      this.NotifyIcon.Visible = true;
+      this.NotifyIcon.DoubleClick += new System.EventHandler(this.NotifyIcon_DoubleClick);
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -57,8 +67,13 @@
       this.Controls.Add(this.ResetButton);
       this.Controls.Add(this.UpdateNowButton);
       this.Controls.Add(this.SettingsCheckedListBox);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+      this.MaximizeBox = false;
       this.Name = "MainForm";
-      this.Text = "Windows Tool";
+      this.Text = "Win10BSFixer";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+      this.Resize += new System.EventHandler(this.MainForm_Resize);
       this.ResumeLayout(false);
 
     }
@@ -68,6 +83,7 @@
     private System.Windows.Forms.CheckedListBox SettingsCheckedListBox;
     private System.Windows.Forms.Button UpdateNowButton;
     private System.Windows.Forms.Button ResetButton;
+    private System.Windows.Forms.NotifyIcon NotifyIcon;
   }
 }
 

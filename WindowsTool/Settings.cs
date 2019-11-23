@@ -33,7 +33,10 @@ namespace Win10BSFixer
     public void Load()
     {
       if (!File.Exists(SettingsPath))
+      {
+        Save();
         return;
+      }
 
       var formatter = new SoapFormatter();
       using (Stream stream = new FileStream(SettingsPath, FileMode.Open, FileAccess.Read))

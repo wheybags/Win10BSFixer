@@ -21,7 +21,22 @@ namespace Win10BSFixer
 
       updatesKiller = new UpdatesKiller(Settings.Instance.data.KillWindowsUpdate);
       SetupSettingsToggles();
+
+      ContextMenu sysTrayContextMenu = new ContextMenu();
+      sysTrayContextMenu.MenuItems.Add("Open Win10BSFixer", (_, __) =>
+      {
+        Show();
+        this.WindowState = FormWindowState.Normal;
+      });
+
+      sysTrayContextMenu.MenuItems.Add("Exit", (_, __) =>
+      {
+        ReallyExit();
+      });
+
+      NotifyIcon.ContextMenu = sysTrayContextMenu;
     }
+
     protected override void Dispose(bool disposing)
     {
       if (disposing && (components != null))
@@ -101,6 +116,34 @@ namespace Win10BSFixer
 
       for (int i = 0; i < SettingsCheckedListBox.Items.Count; i++)
         SettingsCheckedListBox_ItemCheck(null, new ItemCheckEventArgs(i, SettingsCheckedListBox.GetItemCheckState(i), SettingsCheckedListBox.GetItemCheckState(i)));
+    }
+
+    private void MainForm_Resize(object sender, EventArgs e)
+    {
+      if (this.WindowState == FormWindowState.Minimized)
+        Hide();
+    }
+
+    private void NotifyIcon_DoubleClick(object sender, EventArgs e)
+    {
+      Show();
+      this.WindowState = FormWindowState.Normal;
+    }
+
+    bool FromReallyExit = false;
+    private void ReallyExit()
+    {
+      FromReallyExit = true;
+      Application.Exit();
+    }
+
+    private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      if (FromReallyExit)
+        return;
+
+      Hide();
+      e.Cancel = true;
     }
   }
 }
