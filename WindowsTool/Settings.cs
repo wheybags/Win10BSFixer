@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Soap;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsTool
+namespace Win10BSFixer
 {
   class Settings
   {
@@ -23,7 +23,7 @@ namespace WindowsTool
       }
     }
 
-    private string SettingsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + "\\.windowstool.cfg";
+    private string SettingsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + "\\.win10bsfixer.cfg";
 
     private Settings()
     {

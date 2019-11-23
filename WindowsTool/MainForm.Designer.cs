@@ -1,4 +1,4 @@
-﻿namespace WindowsTool
+﻿namespace Win10BSFixer
 {
   partial class MainForm
   {

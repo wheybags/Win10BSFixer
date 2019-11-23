@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsTool
+namespace Win10BSFixer
 {
   static class Program
   {

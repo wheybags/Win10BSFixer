@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsTool", "WindowsTool\WindowsTool.csproj", "{90801675-5121-43CF-8A78-C0EE32B050C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win10BSFixer", "WindowsTool\Win10BSFixer.csproj", "{90801675-5121-43CF-8A78-C0EE32B050C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsTool
+namespace Win10BSFixer
 {
   public partial class MainForm : Form
   {

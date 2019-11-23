@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WindowsTool
+namespace Win10BSFixer
 {
   class UpdatesKiller : IDisposable
   {
